@@ -1,0 +1,8 @@
+transformers>=4.30
+sentence-transformers>=2.2
+networkx>=3.0
+torch>=2.0
+optimum[exporters]>=1.10
+requests>=2.31  # For Wikidata bootstrap
+peft>=0.5  # For LoRA fine-tuning
+# Still lightweight
