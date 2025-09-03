@@ -1,0 +1,36 @@
+# suhpai-model/main.py
+
+from supreme_karaka_parser import SupremeKarakaParser
+from suhpai_core import SUHPaiCore
+import sys
+
+def main():
+    print("Welcome to Supreme Ultra Hybrid Paninian AI (SUHPAI)!")
+    print("Loading lightweight models...")
+    
+    try:
+        karaka_parser = SupremeKarakaParser()
+        ai = SUHPaiCore(karaka_parser)
+    except Exception as e:
+        print(f"Init failed: {e}. Ensure deps installed.")
+        sys.exit(1)
+
+    print("\nReady! Type 'quit' to exit.")
+    print("\nExamples:")
+    print(" - Who hit the ball?")
+    print(" - He sent it from where?")
+    print(" - Who is near Paris?")
+    print(" - Add fact: Alice lives in Berlin.")  # Statements add/adapt
+    print(" - कौन गेंद मारा? (Who hit the ball?)")  # Multilingual example
+
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() in ["quit", "exit"]:
+            print("SUHPAI: Bye!")
+            break
+        
+        response = ai.process_query(user_input)
+        print(f"SUHPAI: {response}")
+
+if __name__ == "__main__":
+    main()
