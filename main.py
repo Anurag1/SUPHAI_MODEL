@@ -3,14 +3,16 @@
 from supreme_karaka_parser import SupremeKarakaParser
 from suhpai_core import SUHPaiCore
 import sys
+import asyncio
 
 def main():
     print("Welcome to Supreme Ultra Hybrid Paninian AI (SUHPAI)!")
-    print("Loading lightweight models...")
+    print("Loading lightweight models with advanced enhancements...")
     
     try:
         karaka_parser = SupremeKarakaParser()
         ai = SUHPaiCore(karaka_parser)
+        asyncio.run(ai.run_hypothesis_engine())  # Start hypothesis engine
     except Exception as e:
         print(f"Init failed: {e}. Ensure deps installed.")
         sys.exit(1)
@@ -20,8 +22,8 @@ def main():
     print(" - Who hit the ball?")
     print(" - He sent it from where?")
     print(" - Who is near Paris?")
-    print(" - Add fact: Alice lives in Berlin.")  # Statements add/adapt
-    print(" - कौन गेंद मारा? (Who hit the ball?)")  # Multilingual example
+    print(" - Add fact: Alice lives in Berlin at morning for income.")  # Extended syntax
+    print(" - कौन गेंद मारा? (Who hit the ball?)")
 
     while True:
         user_input = input("You: ")
