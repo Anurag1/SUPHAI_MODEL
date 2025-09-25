@@ -1,0 +1,50 @@
+# NotebookLM-Debate (proposal + prototype)
+
+A proposal and reference implementation blueprint for **Multi-Author Debate Mode with Archival Grounding** — a NotebookLM extension that spawns multiple AI "authors" (agents) to debate and synthesize knowledge, with strict claim-level provenance anchored to trusted digital libraries (Internet Archive, Open Library, institutional repositories).
+
+> NOTE: This repository is a design & prototype specification. It contains architecture docs, API adapters, UX mockups, and optional example scripts that wire open multi-agent frameworks to archival retrieval endpoints. It is not a production service.
+
+## Goals
+- Demonstrate a debate→synthesis workflow where agents fetch, cite, and argue using archival sources.
+- Provide UI/UX patterns for notebook integration (live debate log, timeline, provenance inspector).
+- Offer an extensible architecture for safe, auditable knowledge generation.
+
+## Features
+- Multi-agent debate orchestration (configurable personas, debate rounds, moderator).
+- Archival retriever adapters (Internet Archive, Open Library, generic OAI/solr endpoints).
+- Claim extraction & provenance linking (claims → sources → agent evidence).
+- Synthesis aggregator producing: agreement/disagreement matrix, confidence scores, final cited summary.
+- Notebook integration design (insertion of synthesized nodes, timeline view, provenance inspector).
+
+## Architecture (high level)
+1. **Notebook UI**: user selects text/context → "Start Debate".  
+2. **Orchestrator**: spawns agent processes (personas), controls debate rounds.  
+3. **Agent**: retrieves documents via retriever adapters, constructs arguments with citations, responds to other agents.  
+4. **Moderator**: enforces debate rules, aggregates logs, runs fact-checks.  
+5. **Provenance Store**: records claims mapped to source metadata (URL, archive ID, page, timestamp).  
+6. **Synthesis Module**: creates final, cited summary and produces a "sources matrix".
+
+## Getting Started (prototype)
+- Clone the repo.
+- Create `.env` with API keys (OpenAI/other LLMs optional), Internet Archive (no key required for most endpoints), Open Library (public API), and any scholarly APIs you want to use.
+- Run `pip install -r requirements.txt` (or `npm install` for the UI).
+- Example: `python demo/run_debate.py --context "Was X invented before Y?" --agents 3 --sources openlibrary,internetarchive`
+
+> See `/examples` for Colab / Jupyter notebooks showing how to run a lightweight debate loop using AutoGen / LangChain patterns.
+
+## Ethical & legal considerations
+- Respect content licenses and access policies of archives. Avoid redistributing copyrighted scans. Use metadata & snippets under fair use when appropriate.  
+- Include transparency controls: show sources, timestamps, and retrieval queries.  
+- Provide opt-outs for proprietary/paywalled sources.
+
+## Contribution
+Contributions are welcome. Please follow the code of conduct and submit PRs for:
+- retriever adapters for additional archives,
+- UI/UX improvements for provenance display,
+- additional debate protocols and evaluation scripts.
+
+## License
+This project is licensed under the MIT License — see `LICENSE` for details.
+
+## Contact
+For feature requests (e.g., making this an official NotebookLM feature), see `/docs/feedback_to_google.md` for ready-to-paste feedback and submission notes.
